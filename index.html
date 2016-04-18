@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments Feed</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-app="bigPanda" ng-controller="bigPandaCtrl">
+
+<div id="main">
+
+    <div id="comments-form" class="flex-item">
+        <form>
+            <div id="email-field" class="field-wrap"><input type="email" placeholder="Email" ng-model="email" class="field" required></div>
+            <div id="comment-field" class="field-wrap"><textarea placeholder="Comment" ng-model="content" class="field" required></textarea></div>
+            <div id="submit-btn">
+                <div id="fountainG" ng-show="loading">
+                    <div id="fountainG_1" class="fountainG"></div>
+                    <div id="fountainG_2" class="fountainG"></div>
+                    <div id="fountainG_3" class="fountainG"></div>
+                    <div id="fountainG_4" class="fountainG"></div>
+                    <div id="fountainG_5" class="fountainG"></div>
+                    <div id="fountainG_6" class="fountainG"></div>
+                    <div id="fountainG_7" class="fountainG"></div>
+                    <div id="fountainG_8" class="fountainG"></div>
+                </div>
+                <input type="submit"name="submit" value="Submit"
+                                        ng-click="newComment($event)">
+            </div>
+        </form>
+    </div>
+    <div id="comments" ng-show="comments.length > 0"  class="flex-item">
+        <input type="text" ng-model="search" placeholder="Filter" class="field">
+        <ul class="list-unstyled">
+            <li ng-repeat="comment in comments | filter:search" class="comment-item clearfix"
+                ng-class="{loaded: comment.loaded}">
+                <div class="comment-avatar"><img ng-src="{{ comment.avatar }}" img-load item-index="{{$index}}">
+                </div>
+                <div class="comment-content">
+                    <b>{{ comment.email }}</b>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
